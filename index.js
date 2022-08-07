@@ -2,23 +2,18 @@ const express = require('express');
 const app = express();
 
 const PORT = 8081;
-const STATUS_CODE = 200;
+
+app.use((req, res, next) => {
+  console.log(
+    `Request method: ${req.method}, 
+       URL: ${req.originalUrl},
+       Timing: ${new Date().toISOString()} `
+  );
+  next();
+});
 
 app.get('/home', (req, res) => {
-  res.send('get request');
-});
-
-app.post('/home', (req, res) => {
-  res.send('post request');
-});
-
-app.delete('/home', (req, res) => {
-  res.send('delete request');
-});
-
-app.use((req, res) => {
-  //исп если не совпадет никакой из запросов выше. Методы выше выполняються попорядку
-  res.send('Unknown request');
+  res.json({ javascript: 'object' });
 });
 
 app.listen(PORT, err => {
