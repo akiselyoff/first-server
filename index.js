@@ -1,4 +1,5 @@
 const express = require('express');
+const morgan = require('morgan');
 const app = express();
 
 const PORT = 8081;
@@ -6,6 +7,7 @@ const PORT = 8081;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })); //for parse form data
 app.use(express.static('public')); //for build static web site. All you want to return as site
+app.use(morgan('tiny')); //HTTP request logger middleware
 
 app.use((req, res, next) => {
   console.log(
